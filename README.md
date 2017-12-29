@@ -1,24 +1,24 @@
-# README
+# Form-to-email microservice
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[Example](https://coa-test-form-client.herokuapp.com/email_form)
 
-Things you may want to cover:
+This application recieves a JSON `POST` from the [form dispatcher](https://github.com/cityofaustin/form-dispatcher) and delivers an email to the addresses provided in the `deliver_to` parameter. The initial version of this implementation assumes that the value will be provided in the original submission from the browser.
 
-* Ruby version
+## AWS Simple Email Service
 
-* System dependencies
+The application uses Amazon's Simple Email Service to handle message delivery. The SES services are procured under the CTM AWS account.
 
-* Configuration
+### Sender white-listing
 
-* Database creation
+Any *from* address must be white-listed by AWS. Attempting to send from a non-white-listed email address will result in a delivery error and failure message.
 
-* Database initialization
+## Required parameters
 
-* How to run the test suite
+The applicatin expects these paramters to be included in the `POST` from the dispatch service.
 
-* Services (job queues, cache servers, search engines, etc.)
+- `deliver_to` specifies the email address to send the submission to.
+- `email_subject` specifies the subject line for the email that gets sent.
 
-* Deployment instructions
+## Heroku
 
-* ...
+The application is deployed on Heroku as a Personal application.
